@@ -6,24 +6,29 @@ app.get("/", (req, res)=>{
     res.send("Home Page!");
 })
 
-app.get("/orders", (req, res)=>{
-    res.send("Here is a list of all orders!")
+app.get("/products", (req, res)=>{
+    res.send("Here is a list of all products!")
 })
-app.post("/orders", (req, res)=>{
-    res.send("A new order has been created!");
-})
-
-app.get("/users", (req, res)=>{
-    res.send("here is a list of all users!")
+app.post("/products", (req, res)=>{
+    res.send("A new product has been added!");
 })
 
-app.post("/users", (req, res)=>{
-    res.send("A new user has been created!")
+app.get("/categories", (req, res)=>{
+    res.send("Here is a list of all categories!")
 })
 
+app.post("/categories", (req, res)=>{
+    res.send("A new category has been created!")
+})
 
-app.listen(3000, ()=>{
-    console.log("Server is up and running on port 3000! Ready to handle requests.");
+app.get(`/{*splat}`, (req, res)=>{
+    res.status(404);
+    console.log("Error 404 Page Not Found")
+    res.send("<h1>404- Page Not Found</h1>")
+})
+
+app.listen(4000, ()=>{
+    console.log("Server is up and running on port 4000! Ready to handle requests.");
 });
 
 
