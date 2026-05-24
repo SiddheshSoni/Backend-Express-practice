@@ -2,28 +2,32 @@ const express = require("express");
 
 const app = express();
 
+app.use((req, res, next)=>{
+    console.log(`${req.method} request made to ${req.url}`);
+    next();
+})
+
 app.get("/", (req, res)=>{
     res.send("Home Page!");
 })
 
-app.get("/welcome/:username", (req, res)=>{
-    const username = req.params.username;
-    const role = req.query.role || "";
-    res.send(`<h1>Welcome ${username} ${role? `, Your Role is: ${role}` :"!"}</h1>`)
+app.get("/products", (req, res)=>{
+    res.send("Here is a list of all products!")
 })
 app.post("/products", (req, res)=>{
     res.send("A new product has been added!");
 })
 
-// app.get("/categories", (req, res)=>{
-//     res.send("Here is a list of all categories!")
-// })
+app.get("/categories", (req, res)=>{
+    res.send("Here is a list of all categories!")
+})
 
-// app.post("/categories", (req, res)=>{
-//     res.send("A new category has been created!")
-// })
+app.post("/categories", (req, res)=>{
+    res.send("A new category has been created!")
+})
 
-app.get(`/{*splat}`, (req, res)=>{
+
+app.use((req, res)=>{
     res.status(404);
     console.log("Error 404 Page Not Found")
     res.send("<h1>404- Page Not Found</h1>")
