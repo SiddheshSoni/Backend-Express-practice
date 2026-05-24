@@ -1,6 +1,7 @@
 const express = require("express");
-
 const app = express();
+const categoryRouter = require("./routes/categories");
+const productRouter = require("./routes/products");
 
 app.use((req, res, next)=>{
     console.log(`${req.method} request made to ${req.url}`);
@@ -11,21 +12,8 @@ app.get("/", (req, res)=>{
     res.send("Home Page!");
 })
 
-app.get("/products", (req, res)=>{
-    res.send("Here is a list of all products!")
-})
-app.post("/products", (req, res)=>{
-    res.send("A new product has been added!");
-})
-
-app.get("/categories", (req, res)=>{
-    res.send("Here is a list of all categories!")
-})
-
-app.post("/categories", (req, res)=>{
-    res.send("A new category has been created!")
-})
-
+app.use( "/", categoryRouter);
+app.use( "/", productRouter);
 
 app.use((req, res)=>{
     res.status(404);
