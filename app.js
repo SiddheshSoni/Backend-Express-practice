@@ -6,20 +6,22 @@ app.get("/", (req, res)=>{
     res.send("Home Page!");
 })
 
-app.get("/products", (req, res)=>{
-    res.send("Here is a list of all products!")
+app.get("/welcome/:username", (req, res)=>{
+    const username = req.params.username;
+    const role = req.query.role || "";
+    res.send(`<h1>Welcome ${username} ${role? `, Your Role is: ${role}` :"!"}</h1>`)
 })
 app.post("/products", (req, res)=>{
     res.send("A new product has been added!");
 })
 
-app.get("/categories", (req, res)=>{
-    res.send("Here is a list of all categories!")
-})
+// app.get("/categories", (req, res)=>{
+//     res.send("Here is a list of all categories!")
+// })
 
-app.post("/categories", (req, res)=>{
-    res.send("A new category has been created!")
-})
+// app.post("/categories", (req, res)=>{
+//     res.send("A new category has been created!")
+// })
 
 app.get(`/{*splat}`, (req, res)=>{
     res.status(404);
